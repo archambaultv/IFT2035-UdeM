@@ -1,0 +1,225 @@
+%%%% Recueil d'exercice pour IFT 2035
+%%%% Vincent Archambault-Bouffard
+%%%% vincent.archambault-bouffard@umontreal.ca
+
+%%%% This document is dedicated to the public domain via CC0
+
+%%%% You must compile this document with XeTeX
+
+\documentclass{scrreprt}
+
+%%%% Date, title, author %%%%
+\date{\small Version du \today} 
+\title{Université de Montréal\\IFT 2035 - Exercices}
+\author{Vincent Archambault-Bouffard}
+
+% See : https://tex.stackexchange.com/questions/8351/what-do-makeatletter-and-makeatother-do
+% \thetitle now contains the title, same for author and date
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+%%%% Math  %%%%
+\usepackage{amsmath} % should go before unicode-math
+\usepackage{unicode-math} % loads fontspec package
+
+%%%% Fonts  %%%%
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\setmathfont{Latin Modern Math}
+
+%%%% Languages %%%%
+\usepackage{polyglossia}
+\setmainlanguage{french}
+
+\makeatletter
+\newcommand{\nofrenchpunctuation}[1]{\nofrench@punctuation {#1}\french@punctuation}
+\makeatother
+
+%%%% Colors %%%%
+\usepackage{xcolor}
+
+%%%% Tables %%%%
+\usepackage{booktabs}
+
+%%%% Hyperlinks %%%%
+\usepackage{hyperref}
+% ex : \href{https://www.wikibooks.org}{Wikibooks home}
+\hypersetup{
+    pdftitle={UdeM - IFT 2035 - Exercices},    % title
+    pdfauthor={\theauthor},     % author
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links 
+    citecolor=black,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=black           % color of external links
+}
+
+%%%% Source Code %%%%
+% Requires -shell-escape option
+% Requires python and the Pygments package
+\usepackage{minted}
+\usemintedstyle{friendly} %colorful emacs bw friendly
+\newcommand{\codeinline}[2][]{\mintinline[#1]{text}{#2}}
+\newcommand{\codeinput}[2][]{\inputminted[#1]{text}{#2}}
+\newcommand{\haskellinline}[2][]{\mintinline[#1]{haskell}{#2}}
+\newcommand{\haskellinput}[2][]{\inputminted[#1]{haskell}{#2}}
+\newcommand{\cinline}[2][]{\mintinline[#1]{c}{#2}}
+\newcommand{\cinput}[2][]{\inputminted[#1]{c}{#2}}
+\newcommand{\assemblyinline}[2][]{\mintinline[#1]{gas}{#2}}
+\newcommand{\assemblyinput}[2][]{\inputminted[#1]{gas}{#2}}
+
+%%%% Modify enumeration %%%%
+\usepackage{enumitem}
+
+%%%% Comment to be turned off or on %%%%
+\usepackage{comment}
+%\excludecomment{solution}
+%\includecomment{solution}
+
+
+%%%% Proof Tree %%%%
+\usepackage{bussproofs}
+
+%%%% Headers %%%%
+\usepackage{fancyhdr}
+%\pagestyle{fancy}
+% \fancyhf{}
+% \rhead{Share\LaTeX}
+% \lhead{Guides and tutorials}
+% \rfoot{Page \thepage}
+% \renewcommand{\headrulewidth}{2pt}
+% \renewcommand{\footrulewidth}{1pt}
+
+\usepackage[answerdelayed]{exercise}
+\counterwithin{Exercise}{chapter}
+\counterwithin{Answer}{chapter}
+\renewcounter{Exercise}[chapter]
+\renewcommand{\ExerciseName}{Exercice}
+\renewcommand{\AnswerName}{Solution de l'exercice}
+\renewcommand{\ExePartName}{Partie}
+\renewcommand{\ExerciseHeader}{\centerline{\textbf{\large\ExerciseName\ \ExerciseHeaderNB\medskip}}}
+%\renewcommand{\ExerciseHeader}{\centerline{\textbf{\large\ExerciseName\ \ExerciseHeaderNB\ExerciseHeaderTitle\ExerciseHeaderOrigin\medskip}}}
+\renewcommand{\ExePartHeader}{\vbox{\addvspace{\bigskipamount}\hbox{\textbf{\ExePartName\;\ExePartHeaderNB\ExePartHeaderTitle\medskip}}}}
+\begin{document}
+
+\maketitle
+
+Ce document est dédié au domaine public via \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0 1.0}.
+
+\bigskip
+Pour obtenir le code source de ce document :
+\begin{itemize}
+\item \href{https://github.com/archambaultv/IFT2035-UdeM}{\texttt{\nofrenchpunctuation{https://github.com/archambaultv/IFT2035-UdeM}}}
+\item \texttt{vincent.archambault-bouffard@umontreal.ca}
+\end{itemize}
+
+\pagebreak
+
+\chapter*{Remerciement}
+Je tiens à remercier les personnes suivantes (par ordre alphabétique) :
+\begin{description}
+  \item[Frédéric Hamel] Pour avoir fourni plusieurs solutions.
+  \item[Stefan Monnier] Pour avoir fourni plusieurs exercices.
+  \end{description}
+
+
+\chapter{Introduction}
+Petit recueil d'exercices pour IFT 2035. Vous trouverez les solutions à la fin, lorsqu'elles sont disponibles. 
+
+\chapter{Grammaire}
+
+\input{exercices/grammaire_infixeprefixepostfixe1.tex}
+
+\input{exercices/grammaire_addition_multiplication.tex}
+
+\input{exercices/grammaire_si_seulement_si.tex}
+
+\chapter{Variables}
+
+\input{exercices/variable_portée1.tex}
+
+\input{exercices/implantation_portée.tex}
+
+\chapter{Fonctions}
+
+\input{exercices/passage_paramètres_portée.tex}
+
+\input{exercices/raisonner.tex}
+
+\chapter{Récursion}
+\input{exercices/récursion1.tex}
+
+\chapter{Fermeture}
+\input{exercices/datatype_fermeture.tex}
+
+\input{exercices/fermetures.tex}
+
+\chapter{Types}
+
+\input{exercices/type1.tex}
+
+\chapter{Programmation fonctionnelle}
+
+\input{exercices/récursion2.tex}
+
+\input{exercices/calculatrice_Haskell.tex}
+
+\input{exercices/quicksort_Haskell.tex}
+
+\input{exercices/treemap_Haskell.tex}
+
+\input{exercices/calculatrice_Haskell2.tex}
+
+\input{exercices/liste_infinie.tex}
+
+\input{exercices/programmation_fonctionnelle_C.tex}
+
+\chapter{Gestion mémoire}
+
+\input{exercices/compteur_référence.tex}
+
+\input{exercices/gestion_mémoire.tex}
+
+\input{exercices/malloc_free_mmap.tex}
+
+\chapter{Continuation}
+\input{exercices/continuation.tex}
+
+\chapter{Macros}
+\input{exercices/macro_appel_par_nom.tex}
+
+\input{exercices/macro_case.tex}
+
+\input{exercices/macro_postfixe.tex}
+
+\input{exercices/macro_infixe.tex}
+
+\input{exercices/macro_while.tex}
+
+\input{exercices/macro_trace.tex}
+
+\input{exercices/lambda_let_letstar.tex}
+
+\chapter{Programmation logique}
+\input{exercices/prolog_addition_multiplication.tex}
+
+\input{exercices/prolog_redondance.tex}
+
+\input{exercices/prolog_evaluation.tex}
+
+\input{exercices/prolog_famille.tex}
+
+\input{exercices/prolog_arbres_preuve.tex}
+
+\input{exercices/prolog_quicksort.tex}
+
+\input{exercices/prolog_regex.tex}
+
+\chapter{Solutions}
+\shipoutAnswer
+
+\end{document}

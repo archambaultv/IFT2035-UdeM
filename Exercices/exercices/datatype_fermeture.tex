@@ -1,0 +1,193 @@
+\begin{Exercise}
+\label{ex:datatype_fermeture}
+Cet exercice a pour objectif de vous faire pratiquer les fermetures et de
+vous convaincre qu'elles peuvent servir de structure de données. Nous
+allons utiliser les encodages de Church pour écrire les structures de
+données usuelles sous forme de fonctions. Chaque fonction peut être
+écrite sur une ligne, mais ce sont des lignes qui ne sont pas toujours
+facile à trouver.
+
+\subsection*{Détail technique}
+Nous allons redéfinir plusieurs identificateurs de la libraire
+standard. Je vous conseille de mettre la ligne suivant au début de
+votre fichier Haskell pour éviter que le compilateur ou ghci vous
+indique que vous faites ombrage aux définitions standards.
+\begin{minted}{haskell}
+import Prelude hiding (Bool, succ, fst, snd, head, tail)
+\end{minted}
+
+\ExePart[title={Booléen}]
+\label{sec:boolean}
+Vous devez implanter les booléens sous forme de fonctions. Pour vous
+donner un indice, le type des deux fonctions qui représentent le
+boolen \codeinline{true} et \codeinline{false} est le suivant:
+\begin{minted}{haskell}
+type Bool a = a -> a -> a
+\end{minted}
+
+Vous devez :
+\begin{enumerate}
+\item Écrire la fonction \codeinline{true} et \codeinline{false} de
+  type \codeinline{Bool a}. En fait, il n'y a que deux fonctions
+  possibles avec ce type.
+\item Écrire la fonction \codeinline{if2} qui a pour type
+  \codeinline{Bool a -> a -> a -> a}. C'est à dire quelle prend un
+  booléen et deux valeur de type \codeinline{a} et retourne la première
+  valeur si le booléen est \codeinline{true} et la deuxième sinon.
+\end{enumerate}
+
+Par exemple, dans le code suivant \codeinline{testIfTrue} vaut 1
+\begin{minted}{haskell}
+testIfTrue = if2 true 1 2
+\end{minted}
+et dans le code suivant \codeinline{testIfFalse} vaut 2
+\begin{minted}{haskell}
+testIfFalse = if2 false 1 2
+\end{minted}
+
+\ExePart[title={Nombres naturels}]
+\label{sec:nombre_naturel}
+Vous devez implanter les nombres naturel $0 \ 1 \ 2 \ 3 \ldots$ à l'aide de
+fonctions. Le type d'un nombre naturel est :
+\begin{minted}{haskell}
+type Number t = (t -> t) -> t -> t
+\end{minted}
+
+La logique de l'encodage est la suivante : un nombre est représenté
+par une fonction qui attend une valeur de base de type \codeinline{t}
+et une fonction de type \codeinline{t -> t}. Remarquez que la fonction
+retourne une valeur de type \codeinline{t}. L'idée est que 0
+correspond à la valeur de base, 1 correspond à \emph{une} application
+de la fonction, 2 correspond à \emph{deux} applications de la fonction,
+3 correspond à \emph{trois} applications de la fonction, etc.
+
+Vous devez :
+\begin{enumerate}
+\item Écrire la fonction \codeinline{zero} de type \codeinline{Number
+    t} qui correspond au nombre 0.
+\item Écrire la fonction \codeinline{succ} de type 
+    \codeinline{Number t -> Number t} qui retourne le successeur du nombre
+    reçu en argument. Pour vous aider, voici une définition partielle de 
+    \codeinline{succ}
+\begin{minted}{haskell}
+succ :: Number t -> Number t
+succ n = \f z ->
+\end{minted}
+  \item Écrire la fonction \codeinline{plus} de type
+    \codeinline{Number t -> Number t -> Number t} qui prend deux
+    entiers et retourne un entier qui représente l'addition des deux.
+\end{enumerate}
+
+Par exemple, dans le code suivant \codeinline{myOne} vaut 1
+\begin{minted}{haskell}
+one :: Number t
+one = succ zero
+
+myOne = one (+ 1) 0
+\end{minted}
+et dans le code suivant \codeinline{myTwo} vaut 10
+\begin{minted}{haskell}
+two :: Number t
+two = plus (succ zero) (succ zero)
+
+myTwo = two (+ 5) 0
+\end{minted}
+
+\ExePart[title={Paires}]
+\label{sec:paires}
+Vous devez implanter le concept d'une paire à l'aide de fonctions. Le
+type d'une paire est :
+\begin{minted}{haskell}
+type Pair a b t = (a ->  b ->  t) ->  t
+\end{minted}
+
+Vous devez :
+\begin{enumerate}
+\item Écrire la fonction \codeinline{mkPair} de type
+  \codeinline{a -> b -> Pair a b t} qui construit une
+  paire. Pour vous aider, voici une définition partielle de
+  \codeinline{mkPair}
+\begin{minted}{haskell}
+mkPair :: a -> b -> Pair a b t
+mkPair a b = \f -> 
+\end{minted}
+
+\item Écrire la fonction \codeinline{fst} de type \codeinline{Pair a b
+    a -> a} qui retourne le premier élément de la paire.
+
+\item Écrire la fonction \codeinline{snd} de type \codeinline{Pair a b
+    b -> b} qui retourne le deuxième élément de la paire.
+\end{enumerate}
+
+Par exemple, dans le code suivant \codeinline{x} vaut 0
+\begin{minted}{haskell}
+x = fst (mkPair 0 "c")
+\end{minted}
+et dans le code suivant \codeinline{x} vaut \codeinline{"c"}
+\begin{minted}{haskell}
+x = snd (mkPair 0 "c")
+\end{minted}
+
+\ExePart[title={Liste}]
+\label{sec:paires}
+Finalement, vous devez implanter le concept d'une liste à l'aide de fonctions. Le
+type d'une liste est :
+\begin{minted}{haskell}
+type List a t = (a->t->t)->t->t
+\end{minted}
+Ce type est très similaire à celui des entiers. Vous pouvez réutiliser
+la même logique.
+
+Vous devez :
+\begin{enumerate}
+\item Écrire la fonction \codeinline{cons} de type \codeinline{a ->
+    List a t -> List a t}. Pour vous aider, voici une définition
+  partielle de \codeinline{cons}
+\begin{minted}{haskell}
+cons :: a -> List a t -> List a t
+cons x l = \f z ->
+\end{minted}
+
+\item Écrire la fonction \codeinline{nil} de type \codeinline{List a
+    t} qui représente la liste vide.
+
+\item Écrire la fonction \codeinline{isNil} de type \codeinline{List a
+    (Bool t2) -> Bool t2} qui retourne vrai ou faux si la liste
+  est vide ou non. Il s'agit bien du type \codeinline{Bool a} vu à la
+  section \ref{sec:boolean}
+
+\item Écrire la fonction \codeinline{head} de type \codeinline{List a
+    a -> a -> a} qui retourne le premier élément de la liste. Le
+  deuxième paramètre est une valeur par défaut qu'il faut retourner si
+  la liste est vide.
+
+\end{enumerate}
+
+Par exemple, dans le code suivant \codeinline{x} vaut \codeinline{"vrai"}
+\begin{minted}{haskell}
+x =  isNil nil "vrai" "faux"
+\end{minted}
+et dans le code suivant \codeinline{x} vaut \codeinline{"faux"}
+\begin{minted}{haskell}
+x =  isNil (cons 1 nil) "vrai" "faux"
+\end{minted}
+et dans le code suivant \codeinline{x} vaut 1
+\begin{minted}{haskell}
+x =  head (cons 1 nil) 0
+\end{minted}
+et dans le code suivant \codeinline{x} vaut 0
+\begin{minted}{haskell}
+x =  head nil 0
+\end{minted}
+
+\subsection*{Pour les curieux}
+Maintenant vous savez qu'en présence des fermetures il n'est pas
+nécessaire (en théorie) d'avoir des structures de données. C'est
+pourquoi le lambda calcul, qui est un langage minimaliste composé
+uniquement de fonctions, est souvent utilisé pour modéliser les
+langages fonctionnels.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:datatype_fermeture}]
+  \haskellinput{exercices/datatype_fermeture_solution.hs}
+\end{Answer}

@@ -1,0 +1,43 @@
+\begin{Exercise}[title={Table associative}]
+  \label{ex:treemap}
+Soit le type suivant en Haskell qui définit un arbre binaire que l'on peut
+utiliser pour représenter une table associative (qui associe des \emph{clés}
+de type \haskellinline{Int} à des valeurs de type \codeinline{b}):
+%%
+\begin{minted}{haskell}
+data TreeMap b = Empty | Node Int b (TreeMap b) (TreeMap b)
+\end{minted}
+%%
+L'exercice est de définir les opérations typiques sur une telle
+structure de donnée.  Bien sûr, pour être utile l'arbre doit être
+maintenu dans l'ordre: toutes les clés dans la branche de gauche d'un
+\mintinline{haskell}{Node} doivent être plus petites que la clé du noeud, et
+vice versa pour la branche de droite.
+
+Il y a trois opérations:
+\begin{itemize}
+\item \haskellinline{tmLookup}: rechercher la valeur associée à une clé passée
+  en paramètre.
+\item \haskellinline{tmInsert}: ajouter une entrée (donnée sous la forme
+  d'une clé et de sa valeur) dans la table.
+\item \haskellinline{tmRemove}: enlever une entrée (dont la clé est passée
+  en paramètre).
+\end{itemize}
+Ces fonctions ne doivent jamais signaler d'erreur.
+\begin{enumerate}
+\item Donner le type de ces trois fonctions.
+\item Donner une liste, aussi concise et complète que possible,
+  d'axiomes formels auxquels ces opérations doivent obéir.  E.g. un de
+  ces axiomes formalisera le fait qu'un \haskellinline{tmLookup} d'une clé
+  $x$ juste après un \haskellinline{tmInsert} de la même clé avec une
+  valeur $v$ devrait trouver $v$.
+\item Donner le code des trois fonctions.
+\end{enumerate}
+Pour rendre l'exercice plus utile, il est important de faire ces étapes dans
+l'ordre: i.e. ne pas écrire le code avant d'avoir décidé du type
+des fonctions et de leurs spécifications.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:treemap}]
+  \haskellinput{exercices/treemap_Haskell_solution.hs}
+\end{Answer}

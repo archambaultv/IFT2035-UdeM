@@ -1,0 +1,28 @@
+\begin{Exercise}
+Soit la relation \codeinline{membre} qui défini quand un élément est dans une liste:
+%%
+\begin{minted}{prolog}
+  membre(E, [E | _]).
+  membre(E, [_ | L]) :- membre(E, L).
+\end{minted}
+%%
+\begin{enumerate}
+\item Montrer l'arbre de preuve des étapes importantes par lesquelles passe
+  le système Prolog pour essayer de satisfaire la requête:
+  \begin{displaymath}
+    \verb|membre(X, [1, 1]), X == 2.|
+  \end{displaymath}
+  Où \texttt{A == B} est le prédicat qui demande l'unification de $A$ et de
+  $B$. \\
+  Les étapes importantes sont celles où la recherche tombe sur une
+  impossibilité (et doit donc faire un retour-arrière).%%   Utiliser la
+  %% notation $\frac{\textsl{premisses}}{\textsl{conclusion}}$ pour représenter
+  %% les arbres de preuve.
+\item Corriger la relation avec l'aide de l'inégalité \verb|\==| de sorte
+  qu'elle évite la redondance.
+\item En utilisant votre nouvelle définition, dessiner l'arbre de preuve
+  qui satisfait la requète \verb|membre(1,[2,1,3]).|
+\item De même montrer les arbres de preuve importants construits pour essayer
+  de satisfaire la requête \verb|membre(1,[2,3,4]).|
+\end{enumerate}
+\end{Exercise}

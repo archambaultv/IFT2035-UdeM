@@ -1,0 +1,39 @@
+\begin{Exercise}
+\label{ex:raisonner}
+  Soit le morceau de code suivant dans un langage hypothétique qui
+utilise une syntaxe de style C, et où \codeinline{f} est une fonction
+quelconque \emph{que l'on ne connaît pas}:
+\begin{minted}{C}
+{
+  int table[2] = {0, 1};
+  int size = 2;
+  int tmp = 0;
+
+  f (table, size);
+  ...
+}
+\end{minted}
+On aimerait savoir si certaines conditions sont nécessairement
+toujours vraies aprés l'appel à \codeinline{f}.  On s'intéresse plus
+particulièrement aux conditions suivantes:
+\begin{itemize}
+\item \codeinline{table[0] == 0}
+\item \codeinline{size == 2}
+\item \codeinline{tmp == 0}
+\end{itemize}
+Indiquer lesquelles de ces trois conditions sont nécessairement vraies
+dans chacun des cas suivants:
+\begin{enumerate}
+\item Le langage est exactement comme C: portée statique, passage
+  d'arguments par valeur, affectation autorisée.
+\item Le langage est comme C sauf que l'affectation (autre que
+  l'initialization) est interdite.
+\item Le langage est comme C sauf que les arguments sont passés par
+  référence.
+\item Le langage est comme C mais avec portée dynamique.
+\end{enumerate}
+\end{Exercise}
+
+% \begin{Answer}[ref={ex:raisonner}]
+
+% \end{Answer}

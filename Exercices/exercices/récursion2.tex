@@ -1,0 +1,28 @@
+\begin{Exercise}[title={Récursion et arbre binaire}]
+  \label{ex:recursion_arbre_binaire}
+Soit un arbre binaire défini par le datatype ci-dessous
+\begin{minted}{haskell}
+data Tree = Leaf Int
+          | Node Tree Int Tree
+\end{minted}
+
+\noindent Écrire le code des fonctions suivantes :
+\begin{description}
+\item[nbrLeaf] Retourne le nombre de feuilles dans l'arbre
+\item[nbrNodes] Retourne le nombre de noeuds dans l'arbre (la fonction
+  ne compte pas les feuilles)
+\item[applyFunction] Prend une fonction $f$ de type \haskellinline{Int -> Int} 
+  en paramètre ainsi qu'un arbre $t$ et applique la fonction
+  $f$ à l'entier de chaque \haskellinline{Node} et \haskellinline{Leaf} de
+  $t$.
+
+  La signature de applyFunction est:
+
+ \haskellinline{applyFunction :: (Int -> Int) -> Tree -> Tree}.
+ 
+\end{description}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:recursion_arbre_binaire}]
+  \haskellinput{exercices/récursion2_solution.hs}
+\end{Answer}

@@ -1,0 +1,40 @@
+\begin{Exercise}
+Soit le code Prolog suivant qui interprète un mini langage typé
+dynamiquement et composé seulement d'entiers \codeinline{int(N)}, de
+variables \codeinline{id(X)}, de fonctions \codeinline{lambda(X,E)},
+et d'applications de fonctions \codeinline{app(E1,E2)}:
+
+\begin{minted}{prolog}
+%% subst(+E1, +E2, +X, -V)
+%% indique que la substitution de X par V dans E1 renvoie E2.
+%% On présume que V est fermé!
+subst(int(N), int(N), _, _).
+subst(id(X), V, id(X), V).
+subst(id(Y), id(Y), id(X), _) :- X \= Y.
+subst(lambda(X, E), lambda(X, E), X, _).
+subst(lambda(Y, Ea), lambda(Y, Eb), X, V) :-
+    X \= Y, subst(Ea, Eb, X, V).
+subst(app(E1a, E2a), app(E1b, E2b), X, V) :-
+    subst(E1a, E1b, X, V), subst(E2a, E2b, X, V).
+
+%% reduce(+E, -V)
+%% indique que l'évaluation de E renvoie V.
+reduce(int(N), int(N)).
+reduce(lambda(X, B), lambda(X, B))
+reduce(app(E1, E2), V) :-
+    reduce(E1, lambda(X, B)),
+    reduce(E2, V2),
+    subst(B, E, X, V2),
+    reduce(E, V).
+\end{minted}
+
+\begin{enumerate}
+
+\item Quel mode de passage d'arguments l'interpéteur ci-dessus implante-t-il ?
+\item Modifier le code Prolog de sorte à implanter l'autre mode de
+  passage d'arguments.
+\item Est-ce que la portée des variables est statique ou dynamique ?
+  Donner un morceau de code prolog qui fait la différence.
+
+\end{enumerate}
+\end{Exercise}

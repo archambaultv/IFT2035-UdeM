@@ -1,0 +1,20 @@
+\begin{Exercise}
+La relation \codeinline{axe(X,Y,Z)} telle que définie ci-après peut donner des
+solutions redondantes.
+%%
+\begin{minted}{prolog}
+axe(_,0,0).
+axe(0,_,0).
+\end{minted}
+%%
+Donner d'abord un exemple d'interaction avec le système GNU Prolog qui
+montre cette redondance.
+
+Utiliser ensuite l'opérateur prédéfini \codeinline{T1 \== T2} pour
+corriger la définition précédente de manière à éviter les solutions
+redondantes produites par la relation \codeinline{axe(X,Y,Z)}.
+L'opérateur \codeinline{T1 \== T2} permet de tester si les termes
+\emph{clos} \codeinline et \codeinline{T2} sont différents.  C'est un opérateur
+impur car il ne permet pas, par exemple, d'énumérer tous les termes
+\codeinline{T2} possibles qui sont différents de \codeinline{T1}.
+\end{Exercise}

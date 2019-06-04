@@ -1,0 +1,40 @@
+\begin{Exercise}
+  \label{ex:if_then_else}
+Voici une grammaire pour if then else. Les règles <E> et <X>
+représente des expressions et autres règles de la grammaire dont il
+n'est pas important de spécifier.
+\begin{minted}{text}
+  <S> ::=  <X>
+       | 'if' <E> 'then' <S>
+       | 'if' <E> 'then' <S> 'else' <S>} 
+\end{minted}
+
+Cette grammaire est ambiguë. 
+\begin{enumerate}
+\item Donner un exemple d'ambiguïté.
+\item Donner la grammaire non ambiguë qui associe les else avec le if
+  le plus proche.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:if_then_else}]
+  Voici une phrase ambigüe : \codeinline{if E1 then if E2 then E3 else E4}. Elle
+  peut s'interpréter des deux façons ci-dessous.
+
+  \begin{itemize}
+  \item \codeinline{if E1 then (if E2 then E3 else E4)}
+  \item \codeinline{if E1 then (if E2 then E3) else E4}.
+  \end{itemize}
+    
+  Pour lever l'ambiguïté, il faut par exemple arbitrairement décider que les
+  \codeinline{else} se réfèrent aux \codeinline{if} les plus proches.
+
+\begin{minted}{text}
+<S> ::= <X>
+    | 'if' <E> 'then' <S>
+    | 'if' <E> 'then' <SElse> 'else' <S>
+
+<SElse> ::=
+  | 'if' <E> 'then' <SElse> 'else' <SElse>
+\end{minted}
+\end{Answer}

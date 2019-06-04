@@ -1,0 +1,19 @@
+\begin{Exercise}[title={Macro infixe}]
+Faire une macro pour la notation infixe des opérateurs \codeinline{+},
+\codeinline{-},\codeinline{*}, \codeinline{/}, \codeinline{>},
+\codeinline{<}, \codeinline{=}.
+
+Par exemple :
+\begin{minted}{text}
+(let ((x 5))
+  (infix (1 + x) * 3 / 2)) ; 9
+
+(let ((x 5)
+      (y 10))
+  (infix x * 2 < y - 1)) ; #f
+
+(let ((x 5)
+      (y 10))
+  (infix x * 2 = y )) ; #t
+\end{minted}
+\end{Exercise}

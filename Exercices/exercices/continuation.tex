@@ -1,0 +1,26 @@
+\begin{Exercise}
+Réécrire les fonctions suivantes en mode CPS (continuation passing
+style). C'est à dire que chaque fonction doit prendre une continuation
+et envoyer son résultat à cette continuation.
+
+\begin{minted}{Haskell}
+import Prelude hiding (length)
+
+length :: [a] -> Int
+length [] = 0
+length (_ : xs) = 1 + length xs
+  
+applatir :: [[a]] -> [a]
+applatir [] = []
+applatir (xs : xss) = xs ++ applatir xss
+
+fact :: Int -> Int
+fact 0 = 1
+fact n = n * fact (n - 1)
+
+fib :: Int -> Int
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n - 1) + fib (n - 2)
+\end{minted}
+\end{Exercise}

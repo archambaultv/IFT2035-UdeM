@@ -1,0 +1,8 @@
+# Latex
+*.pygtex
+*.log
+*.out
+*.aux
+*.pygstyle
+*.bbl
+*.blg

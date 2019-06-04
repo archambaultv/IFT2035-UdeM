@@ -1,0 +1,48 @@
+\begin{Exercise}[title={Calculatrice en Haskell --  2}]
+  \label{ex:calculatrice2}
+Vous devez écrire le vérificateur de types et l'évaluateur pour un
+langage uniquement composé d'opérateur arithmétique. Les opérateurs
+disponibles sont \codeinline{+}, \codeinline{-}, \codeinline{==},
+\codeinline{<}, \codeinline{if} et \codeinline{not}. Ils peuvent être
+encodés par le datatype ci-dessous : \haskellinput[firstline=6,
+lastline=12]{exercices/calculatrice_Haskell2_solution.hs}
+
+Le langage est composé d'applications préfixes d'opérateurs, de nombres
+entiers et de booléens. Le datatype \codeinline{Exp} ci-dessous peut
+être utilisé comme arbre de syntaxe abstraite.  \haskellinput[firstline=17,
+lastline=21]{exercices/calculatrice_Haskell2_solution.hs}
+Par exemple, l'ASA ci-dessous est équivalent à 
+\codeinline{(if (< 1 2) True False)}
+\begin{minted}{text}
+EApp [EOp OIf, (EApp [EOp OLessThan, EInt 1, EInt 2]), 
+               EBool True, 
+               EBool False]
+\end{minted}
+
+Le résultat d'une évaluation est une valeur représentée par le type
+\codeinline{Value}. \haskellinput[firstline=28,
+lastline=30]{exercices/calculatrice_Haskell2_solution.hs}
+
+Vous devez écrire la fonction typeCheck qui doit vérifier que les
+expressions sont valides. Chaque expression peut uniquement être de
+type entier ou booléen.
+\haskellinput[firstline=32,lastline=34]{exercices/calculatrice_Haskell2_solution.hs} Les
+applications partielles d'opérateur ne sont pas permises. Évidemment
+une application avec trop de paramètres est également une erreur. Les
+opérateurs acceptent soit des entiers ou des booléens selon leur
+sémantique habituelle. La branche vraie et la branche alternative du
+\codeinline{if} doivent être du même type. Votre fonction
+\codeinline{typeCheck} doit avoir la signature suivante:
+\haskellinput[firstline=36,lastline=36]{exercices/calculatrice_Haskell2_solution.hs}
+
+Une fois la fonction \codeinline{typeCheck} écrite, vous pouvez écrire
+la fonction \codeinline{eval} sans avoir à gérer les erreurs. Ainsi,
+les cas impossibles lorsqu'une expression est bien typée, une
+application de \codeinline{+} avec un seul argument par exemple, n'ont
+pas à être gérés. Votre fonction \codeinline{eval} aura pour signature:
+\haskellinput[firstline=83,lastline=83]{exercices/calculatrice_Haskell2_solution.hs}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:calculatrice2}]
+  \haskellinput{exercices/calculatrice_Haskell2_solution.hs}
+\end{Answer}

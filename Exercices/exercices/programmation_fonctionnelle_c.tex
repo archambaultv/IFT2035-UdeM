@@ -1,0 +1,30 @@
+\begin{Exercise}[title={Programmation fonctionnelle en C}]
+Soit la fonction C suivante:
+\begin{minted}{C}
+void main (void)
+{ /* Élimine les caractères répétés et
+   * stoppe après la première ligne vide.  */
+  int c;
+  int last = EOF;
+  while ((c = getchar ()) != EOF) {
+    if (c == last) {
+      if (c == '\n') {
+        break;
+      } else {
+        continue;
+      }
+    }
+    putchar (last = c);
+  }
+}
+\end{minted}
+D'abord, réécrire le code dans un style de programmation structurée
+stricte, c'est à dire sans utiliser de \codeinline{continue},
+\codeinline{break}, ou \codeinline{goto}.
+
+Ensuite, réécrire le code à nouveau mais cette fois dans un style
+fonctionnel, c'est à dire sans opération d'affectation (sauf bien sûr dans
+les initialisations, e.g. \codeinline{int last = EOF}).  Il faudra
+introduire une fonction récursive auxiliaire et éliminer \codeinline{while},
+\codeinline{break}, et \codeinline{continue}.
+\end{Exercise}

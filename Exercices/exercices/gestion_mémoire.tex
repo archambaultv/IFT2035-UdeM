@@ -1,0 +1,29 @@
+\begin{Exercise}[title={Gestion mémoire manuelle}]
+Écrire une librairie de listes simplement chaînées en C.
+
+\begin{minted}{C}
+typedef struct list_elem list_elem;
+struct list_elem {
+  void *value;
+  list_elem *next;
+}
+typedef struct list list;
+struct list { list_elem *head; }
+
+list *list_alloc  (void);
+void  list_insert (list *l, void *v);
+void *list_get    (list *l, int n);
+\end{minted}
+
+\begin{enumerate}
+\item Écrire le code des trois fonctions proposées.  Compléter en ajoutant
+  les opérations suivantes: \codeinline{list_remove}, \codeinline{list_free}.
+
+\item Décrire précisément les conditions nécessaires (que l'utilisateur de
+  la librairie doit suivre) pour qu'il n'y ait pas de déréférence de
+  pointeur fou, ni de fuite.
+
+\item Expliquer pourquoi ces conditions sont nécessaires et suffisantes pour
+  garantir l'absence d'erreurs de type pointeur fou ou fuite.
+\end{enumerate}
+\end{Exercise}

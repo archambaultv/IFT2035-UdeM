@@ -1,0 +1,27 @@
+\begin{Exercise}[title={Quicksort en Haskell}]
+  \label{ex:quicksort_haskell}
+Implanter en Haskell une variante de quicksort pour des listes
+d'entiers.  En clair, trier une liste comme suit:
+\begin{enumerate}
+\item choisir un élément, que l'on nommera le pivot.
+\item partitionner la liste en deux sous-listes d'éléments plus
+  petits et respectivement plus grands que le pivot.
+\item trier les deux sous-listes.
+\item combiner ces sous-listes triées et le pivot en une liste triée.
+\end{enumerate}
+Le type sera: \haskellinline{quicksort :: [Int] -> [Int]}. Il faudra
+peut-être définir une ou plusieurs fonctions auxiliaires. L'opération
+de concaténation de deux listes s'écrit \haskellinline{++} en Haskell.
+
+Finalement, généraliser la fonction de tri précédente pour pouvoir
+l'appliquer à des listes quelconques (pas seulement
+\haskellinline{Int}), en passant un argument supplémentaire qui
+indique l'opération de comparaison à utiliser.
+
+Donner aussi le type de cette fonction plus générale et de toutes les
+fonctions auxiliaires que vous avez définies.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:quicksort_haskell}]
+  \haskellinput{exercices/quicksort_Haskell_solution.hs}
+\end{Answer}

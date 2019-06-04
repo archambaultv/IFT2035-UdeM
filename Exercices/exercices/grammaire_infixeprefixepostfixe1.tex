@@ -1,0 +1,25 @@
+\begin{Exercise}[title={Conversion préfixe, infixe, postfixe}]
+  \label{ex:infixe-prefixe-postfixe}
+Pour chaque expression infixe ci-dessous, réécriver l'expression en
+notation préfixe et postfixe. Dessiner également l'arbre de syntaxe
+abstraite (ASA).
+
+\begin{enumerate}
+\item $a + b + c$
+\item $a + (b + c)$
+\item $a \cdot b + c \cdot d$
+\item $a + b < a \cdot (c + d)$
+\item $\sqrt{b \cdot b - 4 \cdot a \cdot c}$
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:infixe-prefixe-postfixe}]
+La réponse contient d'abord l'expression en préfixe, ensuite l'expression en postfixe.
+\begin{enumerate}
+\item $+ + a b c$ et $a b + c +$
+\item $+ a + b c$ et $a b c + +$
+\item $+ \cdot a b \cdot c d$ et $a b \cdot c d \cdot +$ 
+\item $< + a b \cdot a + c d$ et $a b + a c d + \cdot <$
+\item $\sqrt{} - \cdot b b \cdot \cdot 4 a c$ et $b b \cdot 4 a \cdot c \cdot - \sqrt{}$
+\end{enumerate}
+\end{Answer}

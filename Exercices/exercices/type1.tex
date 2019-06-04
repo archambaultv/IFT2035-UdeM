@@ -1,0 +1,35 @@
+\begin{Exercise}[title={Inférence de type}]
+\label{inference_type}
+  Inférer les types des expressions Haskell ci-dessous. Vous pouvez
+tenir pour acquis que les nombres sont de type
+\haskellinline{Int}.
+\begin{enumerate}
+\item \haskellinline{5}
+\item \haskellinline{'c'}
+\item \haskellinline{"Hello World"}
+\item \haskellinline{[1, 2]}
+\item \haskellinline{['c', 'b']}
+\item \haskellinline{\x -> x + 1}
+\item \haskellinline{let x = 5 in x + 1}
+\item \haskellinline{\f x -> f x x}
+\item \haskellinline{\f f2 y -> f (f2 y)}
+\item \haskellinline{\f -> let x =5; y = "hello" in f x y}
+\item \haskellinline{[\x -> x + 1, \y -> y]}
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={inference_type}]
+\begin{enumerate}
+\item \haskellinline{Int}
+\item \haskellinline{Char}
+\item \haskellinline{[Char]}
+\item \haskellinline{[Int]}
+\item \haskellinline{[Char]}
+\item \haskellinline{Int -> Int}
+\item \haskellinline{Int}
+\item \haskellinline{(a -> a -> b) -> a -> b}
+\item \haskellinline{(a -> b) -> (c -> a) -> c -> b}
+\item \haskellinline{(Int -> [Char] -> b) -> b}
+\item \haskellinline{[Int -> Int]}
+\end{enumerate}
+\end{Answer}

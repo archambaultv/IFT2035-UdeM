@@ -1,0 +1,16 @@
+\begin{Exercise}[title={Macro trace}]
+À l'aide de define-macro, écrire la macro
+\codeinline{define-avec-trace} qui a le comportement suivant :
+
+\begin{minted}{scheme}
+> (define-avec-trace f (lambda (n) (if (= n 0) 1 (* n (f (- n 1))))))
+> (f 5)
+  (fonction: f parametres: (n = 5))
+  (fonction: f parametres: (n = 4))
+  (fonction: f parametres: (n = 3))
+  (fonction: f parametres: (n = 2))
+  (fonction: f parametres: (n = 1))
+  (fonction: f parametres: (n = 0))
+  120
+\end{minted}
+\end{Exercise}

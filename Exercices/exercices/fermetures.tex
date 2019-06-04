@@ -1,0 +1,27 @@
+\begin{Exercise}[title={Tables associatives en utilisant des fermetures}]
+  \label{ex:tables_fermetures}
+  Définir en Haskell des fonctions pour gérer des tables associatives
+sans utiliser de constructeur.  Plus précisément, définir:
+\begin{minted}{haskell}
+-- Le type des tables
+type T a b = ... 
+
+-- Une table vide
+empty :: T a b   
+
+-- Ajoute une valeur de type b liée à la clé de type a
+-- dans une table existante
+add :: (Eq a) => a -> b -> T a b -> T a b 
+
+-- Renvoie la valeur de type b liée à la clé de type a 
+-- dans la table ou sinon une valeur par défaut (3e paramètre)
+lookup :: (Eq a) => a -> T a b -> b -> b 
+\end{minted}
+
+Vu que les constructeurs de données ne peuvent pas être utilisés, les
+tables seront nécessairement représentées par des fermetures.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:tables_fermetures}]
+  \haskellinput{exercices/fermetures_solution.hs}
+\end{Answer}

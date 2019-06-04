@@ -1,0 +1,40 @@
+\begin{Exercise}[title={Vers l'infini et plus loin encore !}]
+Les listes infinies sont souvent appelées \emph{streams}.  En Haskell,
+l'ordre d'évaluation utilisé permet d'utiliser n'importe quelle structure de
+donnée infinie sans effort particulier.  Prenons par exemple les définitions
+ci-dessous:
+\begin{minted}{Haskell}
+zeros = 0 : zeros
+uns = 1 : uns
+\end{minted}
+
+De plus, Haskell prédéfini les opérations suivantes:
+\begin{minted}{Haskell}
+(x:_)  !! 0 = x
+(_:xs) !! n = xs !! (n - 1)
+
+take 0 _  = []
+take _ [] = []
+take n (x:xs) = x : take (n - 1) xs
+
+zipWith :: (a->b->c) -> [a]->[b]->[c]
+zipWith _ [] _ = []
+zipWith _ _ [] = []
+zipWith f  (a:as) (b:bs) = f a b : zipWith f as bs
+\end{minted}
+
+\begin{enumerate}
+\item Définir  la liste de nombres :
+\begin{verbatim}
+  (1 2 3 4 5 ...
+\end{verbatim}
+\item Définir  la liste des nombres de Fibonacci :
+\begin{verbatim}
+  (1 1 2 3 5 8 13 ...
+\end{verbatim}
+\item Définir  la liste de nombres :
+\begin{verbatim}
+  (1 1/2 1/6 1/24 1/120 ... 1/n! ...
+\end{verbatim}
+\end{enumerate}
+\end{Exercise}

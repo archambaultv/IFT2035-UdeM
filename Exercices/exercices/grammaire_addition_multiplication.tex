@@ -1,0 +1,115 @@
+\begin{Exercise}[title={Grammaire pour l'addition et la multiplication}]
+  \label{ex:grammaire-add-mult}
+Nous allons voir dans cette section plusieurs grammaires BNF
+possibles pour l'addition et la multiplication. Vous verrez qu'il est
+facile de générer une grammaire BNF ambiguë ou ne respectant pas la
+priorité et l'associativité des opérations.
+
+\ExePart[title={Grammaire 1}]
+\label{expart:grammaire1}
+Soit la grammaire ci-dessous:
+\begin{align*}
+  \text{<expr>}  &\text{::=  <expr> + <expr> | <chiffre>} \\
+  \text{<chiffre>}  &\text{::=  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 }
+\end{align*}
+\begin{enumerate}
+\item Montrer que dans cette grammaire, pour une même expression, il
+  est possible de choisir une dérivation où l'opérateur est
+  associatif à gauche et une dérivation ou l'opérateur est
+  associatif à droite. Cela démontre que la grammaire est ambiguë.
+\end{enumerate}
+\vspace{-\bigskipamount}
+
+\ExePart[title={Grammaire 2}]
+Voici comment on pourrait transformer la grammaire 1 pour lever
+l'ambiguïté.
+\begin{align*}
+  \text{<expr>}  &\text{::=  <expr> + <terme> | <chiffre>} \\
+  \text{<terme>} &\text{::= '(' <expr> ')' | <chiffre>} \\
+  \text{<chiffre>}  &\text{::=  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 }
+\end{align*}
+\begin{enumerate}
+\item Montrer que cette grammaire est associative à gauche.
+\item Donner l'arbre de dérivation de l'expression $1 + (1 + 1) + 1$.
+\end{enumerate}
+Noter que cette grammaire est récursive à gauche et associative à
+gauche.
+
+\ExePart[title={Grammaire 3}]
+Donner une grammaire BNF similaire à la grammaire 1 mais cette
+fois-ci associative à droite.
+
+\ExePart[title={Grammaire 4}]
+La grammaire 2 est associative à gauche et non ambiguë. Voici une
+première tentative d'ajouter l'opérateur de multiplication.
+\begin{align*}
+  \text{<expr>}  &\text{::=  <expr> + <terme> |  <expr> * <terme> | <chiffre>} \\
+  \text{<terme>} &\text{::= '(' <expr> ')' | <chiffre>} \\
+  \text{<chiffre>}  &\text{::=  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 }
+\end{align*}
+
+\begin{enumerate}
+\item Montrer que cette grammaire est non ambiguë.
+\item Cette grammaire ne respecte pas la priorité des
+  opérations. Donner l'arbre de dérivation des expressions
+  $1 + 2 * 3$ et $1 * 2 + 3$.
+\end{enumerate}
+\vspace{-\bigskipamount}
+
+\ExePart[title={Grammaire 5}]
+Soit la grammaire ci-dessous qui corrige le défaut de la grammaire 4. 
+\begin{align*}
+  \text{<expr>}  &\text{::=  <expr> + <terme> |  <terme>} \\
+  \text{<terme>} &\text{::=  <terme> * <facteur> | <facteur>} \\
+  \text{<facteur>} &\text{::= '(' <expr> ')' | <chiffre>} \\
+  \text{<chiffre>}  &\text{::=  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 }
+\end{align*}
+
+\begin{enumerate}
+\item Cette grammaire respecte la priorité des opérations. Donner
+  l'arbre de dérivation des expressions $1 + 2 * 3$ et $1 * 2 + 3$.
+\end{enumerate}
+\vspace{-\bigskipamount}
+
+\ExePart[title={Grammaire 6}]
+Voici comment ajouter la soustraction et la division. 
+\begin{align*}
+  \text{<expr>}  &\text{::=  <expr> + <terme> | <expr> - <terme> |  <terme>} \\
+  \text{<terme>} &\text{::=  <terme> * <facteur> |  <terme> / <facteur> | <facteur>} \\
+  \text{<facteur>} &\text{::= '(' <expr> ')' | <chiffre>} \\
+  \text{<chiffre>}  &\text{::=  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 }
+\end{align*}
+
+\begin{enumerate}
+\item Pourquoi peut-on ajouter la soustraction (division) dans la même
+  catégorie que l'addition (multiplication) plutôt que de créer une
+  nouvelle catégorie ?
+\end{enumerate}
+\vspace{-\bigskipamount}
+
+\ExePart[title={Grammaire 7 - Pour les curieux}]
+La grammaire 5 est non ambiguë et respecte la priorité et
+l'associativité des opérateurs. Toutefois, elle est récursive à gauche
+pour la catégorie <expr> et <terme>. Une grammaire récursive à gauche peut
+engendrer des boucles infinies. 
+
+En effet, dans un parseur avec analyse descendante (top down), la
+portion du programme devant lire la catégorie <expr> doit d'abord faire
+appel à la portion du programme qui doit lire la catégorie <expr> qui doit
+d'abord faire appel à la portion du programme qui doit lire la catégorie
+<expr> qui doit d'abord faire appel ...
+
+Il faut donc transformer cette grammaire en une grammaire équivalente
+mais non récursive à gauche.
+\begin{align*}
+  \text{<expr>}  &\text{::=  <terme> <expr'>} \\
+  \text{<expr'>}  &\text{::=  + <terme> <expr'> | } \epsilon \\
+  \text{<terme>} &\text{::=  <facteur> <terme'>} \\
+  \text{<terme'>} &\text{::=  * <facteur> <terme'> | } \epsilon \\
+  \text{<facteur>} &\text{::= '(' <expr> ')' | <chiffre>} \\
+  \text{<chiffre>}  &\text{::=  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 }
+\end{align*}
+
+Il est possible de montrer que cette grammaire est équivalente à la
+grammaire du numéro 5.
+\end{Exercise}

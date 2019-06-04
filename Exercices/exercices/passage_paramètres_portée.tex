@@ -1,0 +1,22 @@
+\begin{Exercise}
+  \label{ex:passage_portee}
+Écrire un programme qui donne un résultat différent pour chacune des
+combinaisons possibles entre les 4 méthodes de passage de paramètres et
+les 2 types de portées (8 combinaisons en tout). Pour rappel, les 4
+types de passage de paramètres sont :
+\begin{itemize}
+\item passage de paramètres par valeur 
+\item passage de paramètres par référence
+\item passage de paramètres par valeur-résultat
+\item passage de paramètres par nom
+\end{itemize}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:passage_portee}]
+  Il est plus facile de scinder le problème en deux. Une fonction qui teste la
+  portée et l'autre le passage des paramètres. Voici un programme C qui permet
+  de faire la différence.
+  
+  \cinput{exercices/passage_paramètres_portée.c}
+
+\end{Answer}

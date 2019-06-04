@@ -1,0 +1,68 @@
+\begin{Exercise}
+En Prolog, tout comme en Haskell, les chaînes de caractères sont
+représentées par des \emph{listes} de caractères.
+
+Soit la définition suivante du prédicat de filtrage
+\verb+match(RE,Str,Tail)+ qui dit que l'expression régulière \texttt{RE}
+filtre la chaîne de caractères \texttt{Str} avec un résidu \texttt{Tail}.
+
+\begin{minted}{prolog}
+  match(RE, Str, Tail) :- append(RE, Tail, Str).
+  match(any, [_|Tail], Tail).
+  match(concat(RE1, RE2), Str, Tail) :-
+     match(RE1, Str, Tail1), match(RE2, Tail1, Tail).
+  match(repeat(RE), Str, Tail) :-
+     match(RE, Str, Tail1), match(repeat(RE), Tail1, Tail).
+  match(repeat(_), Str, Str).
+\end{minted}
+%%
+Par exemple:
+\begin{minted}{prolog}
+  | ?- match("hello", "hello world", X).
+  X = " world"
+  | ?- match(concat("hel", "lo "), X, "").
+  X = "hello "
+  | ?- match(concat(repeat(any), concat("or", repeat(any))),
+             "hello world", X).
+  X = ""
+  X = "d"
+  X = "ld"
+\end{minted}
+
+\begin{enumerate}
+\item Montrer le (les) arbres de recherche de la requête: \\
+  \verb+match(concat(repeat("a"),"ab"),"abc",X)+
+\item Que se passe-t-il avec la requête: \\
+  \verb+match(concat(repeat("a"), "ab"), X, "")+
+\item Changer le code de manière à éviter ce problème.
+\item Ajouter du code pour l'expression régulière \texttt{or(RE1,RE2)}, de
+  sorte à pouvoir faire des choses telles que:
+\begin{minted}{prolog}
+  | ?- match(or("hello", "world"), X, "").
+  X = "hello"
+  X = "world"
+  | ?- match(repeat(or("a", "b")), "abac", X).
+  X = "c"
+  X = "ac"
+  X = "bac"
+  X = "abac"
+\end{minted}
+\item Montrer le (les) arbres de recherche de la requête: \\
+  \verb+match(repeat(or("a", "b")), "abac", X)+
+\item Ajouter du code pour l'expression régulière \texttt{and(RE1,RE2)}, de
+  sorte à pouvoir faire des choses telles que:
+\begin{minted}{prolog}
+  | ?- match(concat(and(concat(repeat(any),
+                               concat("ol",repeat(any))),
+                        concat(repeat(any),
+                               concat("ll",repeat(any)))),
+                    "o"),
+             "bell hollow world", X).
+  X = "rld"
+  X = "rld"
+  X = "w world"
+  X = "w world"
+\end{minted}
+
+\end{enumerate}
+\end{Exercise}

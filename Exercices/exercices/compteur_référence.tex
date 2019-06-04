@@ -1,0 +1,30 @@
+\begin{Exercise}[title={Compteur de références}]
+Soit une libraire de gestion de listes simplement chaînées en C:
+\begin{minted}{C}
+typedef struct list list;
+struct list {
+  int refcount;
+  void *head;
+  list *tail;
+}
+list *list_cons   (void *head, list *tail);
+void *list_head    (list *l);
+list *list_tail    (list *l);
+/* Copie un pointeur (pas la liste elle même).  */
+list *list_copy   (list *l);
+/* Libère un pointeur (et la liste si c'est le dernier).  */
+void  list_free   (list *l);
+\end{minted}
+
+\begin{enumerate}
+\item Écrire le code des fonctions proposées.
+\item Compléter en ajoutant une opération \codeinline{list_map}.
+\item Justifiez pourquoi les incréments et décréments que vous avez
+judicieusement placés sont suffisants pour garantir que le comportement
+sera correct.
+\item En extraire une convention spécifiant pour les programmeurs qui
+utilisent votre librarie \emph{où} doivent être ajoutés les appels à
+\codeinline{list_copy} et \codeinline{list_free}.
+\item Que se passe-t-il si vous voulez manipuler des listes de listes?
+\end{enumerate}
+\end{Exercise}

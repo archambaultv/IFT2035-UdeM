@@ -1,0 +1,139 @@
+\begin{Exercise}
+  \label{ex:portee_statique_dynamique}
+Soit le code suivant dans un langage hypothétique dont la syntaxe est
+la même que celle de Haskell: 
+\begin{minted}{text}
+  let z = 1
+      x = 2
+      f1 y = z + x + y
+      f2 x = f1 (x + 1)
+      f3 z = f3 (z + 2)
+  in
+      f3 5    
+\end{minted}
+
+Montrer les étapes de l'évaluation dans chacun des deux cas: le cas
+où le langage utilise la portée dynamique et le cas où il utilise
+la portée statique.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:portee_statique_dynamique}]
+  \codeinline{(x -> 5; y -> 6; ...) exp} dénote l'évaluation de \codeinline{exp}
+  dans l'environnement où \codeinline{x} vaut 5, \codeinline{y} vaut 6, etc.  On
+  peut imaginer l'environnement comme une pile. Lorsqu'on cherche la valeur d'un
+  identificateur, on prend la première variable sur le dessus qui correspond.
+  
+  Pour rappel, \codeinline{\x -> body} est une fonction anonyme dont le
+  paramètre est \codeinline{x}.
+
+  \subsection*{Évaluation avec la portée dynamique}
+
+\begin{minted}{text}
+-- L'environnement avant d'évaluer (f3 5)
+{f3 -> \z = f2 (z + 2);
+ f2 -> \x = f1 (x + 1);
+ f1 -> \y = z + x + y avec {z = 1; x = 2});
+ x -> 2;
+ z -> 1} (f3 5)
+
+-- Recherche la valeur de f3 dans l'environnement
+{...} ((\z = f2 (z + 2)) 5)
+
+-- Application de fonction, on ajoute le
+-- paramètre et sa valeur dans l'environnement
+{z -> 5; ...} (f2 (z + 2))
+
+-- Recherche la valeur de z dans l'environnement
+{z -> 5; ...} (f2 (5 + 2))
+
+-- Calcul du paramètre
+{z -> 5; ...} (f2 7)
+
+-- Recherche la valeur de f2 dans l'environnement
+{z -> 5; ...} ((\x = f1 (x + 1)) 7)
+
+-- Application de fonction
+{x -> 7; z -> 5; ...} (f1 (x + 1))
+
+-- Recherche la valeur de x dans l'environnement
+{x -> 7; z -> 5; ...} (f1 (7 + 1)) 
+
+-- Calcul du paramètre
+{x -> 7; z -> 5; ...} (f1 8)
+
+-- Recherche la valeur de f1 dans l'environnement
+{x -> 7; z -> 5; ...} ((\y = z + x + y) 8)
+
+-- Application de fonction
+-- Ici x fait référence au x le plus récent
+-- Même chose pour z
+{y -> 8; x -> 7; z -> 5; ...} (z + x + y) z
+
+-- Recherche la valeur de z, x et y
+{y -> 8; x -> 7; z -> 5; ...} (5 + 7 + 8)
+
+-- Calcul du résultat
+{y -> 8; x -> 7; z -> 5; ...} 20
+\end{minted}
+
+\subsection*{Évaluation avec la portée statique}
+Pour implanter la portée statique, il faut pour chaque expression mémoriser la
+définition des variables libres. Ainsi, si d'autres variables avec le même
+identifiant sont ajoutées dans l'environnement, cela n'affectera pas le résultat
+car on utilisera la définition qui a été mémorisée.
+
+Ainsi, on peut imaginer que chaque fonction a son propre environnement pour ses
+variables libres. Pour simplifier, dans cet exercice nous mémoriserons seulement
+la définition des variables \codeinline{x} et \codeinline{y}.
+
+
+\begin{minted}{text}
+-- L'environnement avant d'évaluer (f3 5)  
+{f3 -> \z = f2 (z + 2);
+ f2 -> \x = f1 (x + 1);
+ f1 -> \y = z + x + y;
+ x -> 2;
+ z -> 1} (f3 5)
+
+-- Recherche la valeur de f3 dans l'environnement
+{...} ((\z = f2 (z + 2)) 5)
+
+-- Application de fonction, on ajoute le
+-- paramètre et sa valeur dans l'environnement
+{z -> 5; ...} (f2 (z + 2))
+
+-- Recherche la valeur de z dans l'environnement
+{z -> 5; ...} (f2 (5 + 2))
+
+-- Calcul du paramètre
+{z -> 5; ...} (f2 7)
+
+-- Recherche la valeur de f2 dans l'environnement
+{z -> 5; ...} ((\x = f1 (x + 1)) 7)
+
+-- Application de fonction
+{x -> 7; z -> 5; ...} (f1 (x + 1))
+
+-- Recherche la valeur de x dans l'environnement
+{x -> 7; z -> 5; ...} (f1 (7 + 1)) 
+
+-- Calcul du paramètre
+{x -> 7; z -> 5; ...} (f1 8)
+
+-- Recherche la valeur de f1 dans l'environnement
+-- f1 a mémorisé les définitions pour x et z
+-- Cela revient à dire que f1 s'évalue dans cet
+-- environnement spécial
+{x -> 2; z -> 1} ((\y = z + x + y) 8)
+
+-- Application de fonction
+{y -> 8; x -> 2; z -> 1} (z + x + y) z
+
+-- Recherche la valeur de z, x et y
+{y -> 8; x -> 2; z -> 1} (8 + 2 + 1)
+
+-- Calcul du résultat
+{y -> 8; x -> 2; z -> 1} 11
+\end{minted}
+
+\end{Answer}
