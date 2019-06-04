@@ -1,5 +1,5 @@
 # IFT 2035 - Université de Montréal
-Concept des languages de programmation.
+**Concept des languages de programmation**
 
 Ce repo contient le code source pour les diapositives ainsi que celui du recueil d'exercices.
 
