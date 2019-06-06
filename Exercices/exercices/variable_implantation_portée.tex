@@ -3,7 +3,7 @@
 Vous devez implanter deux évaluateurs pour un langage minimaliste. L'un aura la
 portée lexicale et l'autre la portée dynamique. Les expressions du langage
 peuvent être décrites avec le datatype \codeinline{Exp}.
-\haskellinput[firstline=1,lastline=5]{exercices/implantation_portée_solution.hs}
+\haskellinput[firstline=1,lastline=5]{exercices/variable_implantation_portée.hs}
 
 Dans les deux cas, l'évaluation d'une expression
 \codeinline{App e1 e2} doit réduire
@@ -12,13 +12,13 @@ l'évaluation ne peut plus se poursuivre.
 
 Pour vous aider, l'évaluateur avec portée dynamique
 a un environnement, des valeurs et une signature définie comme suit:
-\haskellinput[firstline=7,lastline=12]{exercices/implantation_portée_solution.hs}
+\haskellinput[firstline=7,lastline=12]{exercices/variable_implantation_portée.hs}
 
 L'évaluateur avec portée lexicale possède le même environnement mais a
 des valeurs et une signature définie comme suit:
-\haskellinput[firstline=32,lastline=35]{exercices/implantation_portée_solution.hs}
+\haskellinput[firstline=32,lastline=35]{exercices/variable_implantation_portée.hs}
 \end{Exercise}
 
 \begin{Answer}[ref={ex:implantation_portee}]
-  \haskellinput{exercices/implantation_portée_solution.hs}
+  \haskellinput{exercices/variable_implantation_portée.hs}
 \end{Answer}

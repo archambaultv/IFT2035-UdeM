@@ -1,4 +1,5 @@
 \begin{Exercise}[title={Compteur de références}]
+  \label{ex:compteur_reference}
 Soit une libraire de gestion de listes simplement chaînées en C:
 \begin{minted}{C}
 typedef struct list list;
@@ -28,3 +29,7 @@ utilisent votre librarie \emph{où} doivent être ajoutés les appels à
 \item Que se passe-t-il si vous voulez manipuler des listes de listes?
 \end{enumerate}
 \end{Exercise}
+
+\begin{Answer}[ref={ex:compteur_reference}]
+  \cinput{exercices/gestion_mémoire_compteur_référence.c}
+\end{Answer}

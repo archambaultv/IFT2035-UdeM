@@ -1,4 +1,5 @@
 \begin{Exercise}[title={Gestion mémoire manuelle}]
+\label{ex:gestion_memoire_manuelle}
 Écrire une librairie de listes simplement chaînées en C.
 
 \begin{minted}{C}
@@ -27,3 +28,7 @@ void *list_get    (list *l, int n);
   garantir l'absence d'erreurs de type pointeur fou ou fuite.
 \end{enumerate}
 \end{Exercise}
+
+\begin{Answer}
+  \cinput{exercices/gestion_mémoire_manuelle.c}
+\end{Answer}
