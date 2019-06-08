@@ -6,7 +6,7 @@
 
 %%%% You must compile this document with XeTeX
 
-\documentclass{scrreprt}
+\documentclass[10pt]{scrreprt}
 
 %%%% Date, title, author %%%%
 \date{\small Version du \today} 
@@ -73,7 +73,7 @@
 \newcommand{\assemblyinput}[2][]{\inputminted[#1]{gas}{#2}}
 
 %%%% Modify enumeration %%%%
-\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
 
 %%%% Comment to be turned off or on %%%%
 \usepackage{comment}
@@ -94,6 +94,7 @@
 % \renewcommand{\headrulewidth}{2pt}
 % \renewcommand{\footrulewidth}{1pt}
 
+
 \usepackage[answerdelayed]{exercise}
 \counterwithin{Exercise}{chapter}
 \counterwithin{Answer}{chapter}
@@ -101,9 +102,16 @@
 \renewcommand{\ExerciseName}{Exercice}
 \renewcommand{\AnswerName}{Solution de l'exercice}
 \renewcommand{\ExePartName}{Partie}
-\renewcommand{\ExerciseHeader}{\centerline{\textbf{\large\ExerciseName\ \ExerciseHeaderNB\medskip}}}
+
+\renewcommand{\ExerciseHeader}{\belowpdfbookmark{Ex. \ExerciseHeaderNB}{Ex. \ExerciseHeaderNB}{\centerline{\textbf{\large\ExerciseName\ \ExerciseHeaderNB\medskip}}}}
 %\renewcommand{\ExerciseHeader}{\centerline{\textbf{\large\ExerciseName\ \ExerciseHeaderNB\ExerciseHeaderTitle\ExerciseHeaderOrigin\medskip}}}
 \renewcommand{\ExePartHeader}{\vbox{\addvspace{\bigskipamount}\hbox{\textbf{\ExePartName\;\ExePartHeaderNB\ExePartHeaderTitle\medskip}}}}
+% Utilisation d'un compteur pour contourner le problème que \ExerciseHeaderNB ne peut pas être utilisé
+% dans le 2e paramètre de \belowpdfboomark car c'est une command fragile ... robust ... bref erreur de TeX - LaTeX
+\newcounter{answerCounter}
+\renewcommand{\AnswerHeader}{\stepcounter{answerCounter}\belowpdfbookmark{Sol. \ExerciseHeaderNB}{Dummy \theanswerCounter}{\centerline{\textbf{\large\AnswerName{} \ExerciseHeaderNB\medskip}}}}
+%\renewcommand{\AnswerHeader}{\centerline{\textbf{\large\AnswerName{} \ExerciseHeaderNB\medskip}}}
+
 \begin{document}
 
 \maketitle
@@ -134,11 +142,15 @@ Petit recueil d'exercices pour IFT 2035. Vous trouverez les solutions à la fin,
 
 \input{exercices/grammaire_infixeprefixepostfixe.tex}
 
+\input{exercices/grammaire_postfixe.tex}
+
 \input{exercices/grammaire_addition_multiplication.tex}
 
 \input{exercices/grammaire_si_seulement_si.tex}
 
 \chapter{Variables}
+
+\input{exercices/variable_portée2.tex}
 
 \input{exercices/variable_portée.tex}
 
@@ -162,6 +174,8 @@ Petit recueil d'exercices pour IFT 2035. Vous trouverez les solutions à la fin,
 
 \input{exercices/type_inférence.tex}
 
+\input{exercices/type_inférence2.tex}
+
 \chapter{Programmation fonctionnelle}
 
 \input{exercices/pfonc_récursion2.tex}
@@ -178,7 +192,13 @@ Petit recueil d'exercices pour IFT 2035. Vous trouverez les solutions à la fin,
 
 \input{exercices/pfonc_programmation_fonctionnelle_C.tex}
 
+\chapter{Programmation struturée}
+
+\input{exercices/pstructurée_superhero.tex}
+
 \chapter{Gestion mémoire}
+
+\input{exercices/gestion_mémoire_définitions.tex}
 
 \input{exercices/gestion_mémoire_compteur_référence.tex}
 

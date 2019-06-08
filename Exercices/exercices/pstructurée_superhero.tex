@@ -1,0 +1,48 @@
+\begin{Exercise}
+  Vous devez aider un ami à traduire dans le langage C un programme
+  écrit en Haskell.
+
+\begin{enumerate}
+\item
+Convertir les datatypes Haskell ci-dessous dans le langage C:
+\begin{minted}{Haskell}
+data Personne = Personne Int String -- Age et Prénom
+
+data SuperPouvoir = SauterHaut Int
+                  | SauterLoin Int
+                  | GrimperAuMur Int
+                  | Imiter Personne
+
+data SuperHero = SuperHero Personne SuperPouvoir
+
+\end{minted}
+
+\item
+Écrire les fonctions Haskell ci-dessous dans le langage C dans un style
+de programmation structurée (pas de goto).
+
+Vous pouvez considérer que les listes Haskell sont des tableaux en C
+et que la taille du tableau vous est fournie en paramètre.
+\begin{minted}{Haskell}
+plusVieux :: [SuperHero] -> [SuperHero]
+plusVieux ls = 
+  map (\(SuperHero (Personne age nom) sp) ->
+         SuperHero (Personne (age + 1) nom) sp)
+      ls
+
+auMoinsUnSuperHero :: [SuperHero] -> Bool
+auMoinsUnSuperHero ls =
+  let foo (SuperHero (Personne _ "Spiderman") _) _ = True
+      foo (SuperHero (Personne _ "Batman") _) _ = True
+      foo (SuperHero (Personne _ "Capitaine Bobette") _) _ = True
+      foo _ b = b
+  in foldr foo False ls
+\end{minted}
+
+La fonction \codeinline{foldr} a pour définition :
+\begin{minted}{text}
+foldr f z [] = z 
+foldr f z (x:xs) = f x (foldr f z xs) 
+\end{minted}
+\end{enumerate}
+\end{Exercise}

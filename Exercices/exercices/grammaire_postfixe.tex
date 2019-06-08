@@ -1,0 +1,64 @@
+\begin{Exercise}
+\label{ex:postfixe}
+Soit les expressions suivantes en notation postfixe:
+\begin{enumerate}
+\item \codeinline{a b + c - d *}
+\item \codeinline{a b && c d == ||}
+\item \label{exempleSyntaxe}\codeinline{a b + c d * == not}
+\end{enumerate}
+
+\begin{enumerate}
+\item Écrire ces expressions en format infixe, préfixe et en arbre de
+  syntaxe abstraite. \codeinline{==} est l'opérateur de comparaison,
+  \codeinline{&&} est l'opérateur de conjonction et \codeinline{||}
+  est l'opérateur de disjonction.
+
+
+\item
+Il est possible d'évaluer les expressions postfixes facilement à
+l'aide d'une pile. Montrer comment évaluer l'expression numéro
+\ref{exempleSyntaxe} de la page précédente avec une pile. Utiliser les
+valeurs numériques suivantes : $a = 1$, $b = 2$, $c = 3$, $d = 4$.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:postfixe}]
+  \begin{enumerate}
+        \item
+\begin{enumerate}[1.]
+\item \begin{description}
+  \item[préfixe]\codeinline{* - + a b c d}
+  \item[infixe]\codeinline{(a + b - c) * d}
+    \end{description}
+\item \begin{description}
+  \item[préfixe]\codeinline{|| && a b == c d}
+  \item[infixe]\codeinline{(a && b) || (c == d)}
+    \end{description}
+\item \begin{description}
+  \item[préfixe]\codeinline{not == + a b * c d}
+  \item[infixe]\codeinline{not(a + b == c * d)}
+    \end{description}
+  \end{enumerate}
+
+\item
+
+  Il faut évaluer à l'aide d'une pile l'expression \codeinline{1 2 + 3 4 * == not}.
+  La pile sera représenté par une liste,
+  l'élément au somment de la pile est à gauche de la liste.
+
+  Voici les étapes d'évaluation
+  \begin{enumerate}[1.]
+  \item Lecture du chiffre 1. Lorsque c'est un nombre, on l'ajoute dans la pile. Elle vaut \codeinline{[1]}
+  \item Lecture du chiffre 2. La pile vaut \codeinline{[2, 1]}
+  \item \label{ex:postfixe:itemplus} Lecture du symbole \codeinline{+}. On pop les deux premiers éléments de la pile, calcule le résultat et l'ajoute dans la pile. La pile vaut \codeinline{[3]}.
+  \item Lecture du symbole 3. La pile vaut \codeinline{[3, 3]}
+  \item Lecture du symbole 4. La pile vaut \codeinline{[4, 3, 3]}
+  \item Lecture du symbole \codeinline{*}. Même chose que pour l'étape {\ref{ex:postfixe:itemplus}} La pile vaut \codeinline{[12, 3]}
+  \item Lecture du symbole \codeinline{==}. Même chose que pour l'étape {\ref{ex:postfixe:itemplus}} La pile vaut \codeinline{[False]}
+  \item Lecture du symbole \codeinline{not}. On pop le premier élément de la pile, calcule le résultat et l'ajoute sur la pile. La pile vaut \codeinline{[True]}
+  \item Fin de l'expression. La valeur sur la pile donne le résultat, soit \codeinline{True}
+  \end{enumerate}
+  
+  
+\end{enumerate}
+\end{Answer}

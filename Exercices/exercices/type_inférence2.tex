@@ -1,0 +1,41 @@
+\begin{Exercise}
+Donner le type des expressions Haskell ci-dessous. Par exemple, pour
+la question 0, la réponse pourrait être: \codeinline{(Int, Int)}. Le
+type donné devrait être aussi polymorphe que possible.
+
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item \codeinline{(2, 3)}
+\item \codeinline{\a b -> a}
+\item \codeinline{['a','b'] ++ ['c','d']}
+\item \codeinline{\f -> map f [1, 2, 3]}
+\item \codeinline{map (\x -> x) [1, 2, 3]}
+\item \codeinline{let chain f1 f2 = \x -> f1 (f2 x) in chain fst fst}
+\item \codeinline{\x y -> x + y}
+\item \codeinline{[(1, 2), (3, 4)]}
+\item 
+\begin{minted}{text}
+let f eval exp = case eval exp of
+                  Left a -> Left a
+                  Right x -> Right (x + 1)
+in f
+\end{minted}
+\item 
+\begin{minted}{text}
+let x = y x
+    y a b = b 
+in x
+\end{minted}
+\item \codeinline{let f x = x (x 5) in f}
+\end{enumerate}
+
+Pour rappel, {\textbackslash } sert à définir une fonction anonyme. Par
+  exemple \codeinline{\x -> x} est la fonction identité. De plus, les
+  fonctions \codeinline{map} et \codeinline{fst} ont pour définition :
+\begin{minted}{text}
+map f [] = []               
+map f (x : xs) = f x : map f xs
+
+fst (a, b) = a
+\end{minted}
+\end{Exercise}
