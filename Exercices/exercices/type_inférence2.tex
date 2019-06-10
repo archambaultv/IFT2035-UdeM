@@ -1,4 +1,5 @@
 \begin{Exercise}
+  \label{ex:inference2}
 Donner le type des expressions Haskell ci-dessous. Par exemple, pour
 la question 0, la réponse pourrait être: \codeinline{(Int, Int)}. Le
 type donné devrait être aussi polymorphe que possible.
@@ -39,3 +40,21 @@ map f (x : xs) = f x : map f xs
 fst (a, b) = a
 \end{minted}
 \end{Exercise}
+
+\begin{Answer}[ref={ex:inference2}]
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item \codeinline{(Int, Int)}
+\item \codeinline{t1 -> t2 -> t1}
+\item \codeinline{[Char]} ou \codeinline{String}
+\item \codeinline{(Int -> t1) -> [t1]}
+\item \codeinline{[Int]}
+\item \codeinline{((t1, t2), t3) -> t1}
+\item \codeinline{Int -> Int -> Int}
+\item \codeinline{[(Int, Int)]}
+\item \codeinline{(t1 -> Either a Int) -> t -> Either a Int}
+\item \codeinline{t1 -> t1} (Fonctionne car en Haskell l'évaluation est paresseuse)
+\item \codeinline{(Int -> Int) -> Int}
+\end{enumerate}
+  
+\end{Answer}

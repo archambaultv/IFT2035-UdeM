@@ -19,3 +19,59 @@ l'autre.
 \end{enumerate}
 
 \end{Exercise}
+
+\begin{Answer}
+  \begin{enumerate}
+  \item \begin{description}
+    \item[Pointeur fou] L’objet pointé n’existe plus
+    \item[Fuite mémoire] L’objet pointé n’est plus nécessaire, mais la
+      mémoire n'est pas libérée. Par exemple, le pointeur n'est
+      plus sur la pile mais l'objet est toujours dans le tas et donc
+      innaccessible.
+    \end{description}
+
+  \item À chaque objet est associé un compteur qui indique combien de
+    pointeurs existent. Lorsque le compteur passe à 0, on peut
+    désallouer l’objet. Cette technique ne permet pas de gérer les
+    références circulaires.
+
+  \item \begin{description}
+    \item[Mark \& Sweep] Ne déplace pas les objets en mémoire et ne
+      nécessite donc pas deux tas comme dans le stop \& copy.  Puisque
+      les objets ne sont pas déplacés, il est possible d'intégré cette
+      technique dans un langage qui possèdent des pointeurs et qui
+      permet d'obtenir l'adresse mémoire d'un objet.
+      
+      \begin{minted}{text}
+marknSweep(){
+  roots = getRoots();
+  for root in roots
+  mark(root);
+  sweep();
+}
+
+mark(obj){
+  if (obj->marked) return;
+  obj->marked = True;
+  for c in obj.children
+  mark(c);
+}
+
+sweep(){
+  h = heapStartPointer;
+  do {
+    if (h->marked)
+      h->marked = False;
+    else
+      free(h);
+  } while (ptr = next_object(h))
+}
+      \end{minted}
+
+      \item[Stop \& copy] Déplace les objets en mémoire. Permet donc
+        d'obtenir une mémoire compacte. L'allocation de nouveaux
+        objets se fait rapidement, car nul besoin de chercher un
+        espace assez grand dans le tas comme le ferait mark \& sweep.
+    \end{description}
+    \end{enumerate}
+\end{Answer}

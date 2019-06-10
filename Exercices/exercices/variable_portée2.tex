@@ -1,5 +1,5 @@
 \begin{Exercise}
-  
+  \label{ex:portee2}
 \begin{enumerate}
 \item Donner une définition de la portée statique (lexicale) et de la portée
 dynamique.
@@ -11,3 +11,38 @@ clairement pourquoi votre code se comporte différemment d'une portée à
 l'autre.
 \end{enumerate}
 \end{Exercise}
+
+\begin{Answer}[ref={ex:portee2}]
+  \begin{enumerate}
+
+  \item
+    \begin{description}
+    \item[Portée lexicale] La portée d'une variable est définie par le
+      code source du programme.  La définition d'une variable est la
+      définition dans le code source la plus récente ayant le même
+      identificateur.
+    \item [Portée dynamique] La portée d'une variable est définie lors
+      de l'exécution du programme. La définition d'une variable est la
+      définition la plus récemment évaluée (et toujours active) ayant
+      le même identificateur.
+    \end{description}
+
+  \item
+    \begin{minted}{text}
+      x = 1
+      foo y = y + x
+      res = let x = 2
+            in foo 0
+    \end{minted}
+    Avec la portée statique, la variable \codeinline{x} de la fonction
+    foo vaut 1, car c'est la déclaration \codeinline{x = 1} qui est la
+    plus proche dans le code source. Donc \codeinline{res} vaut 1.
+
+    Avec la portée dynamique, la variable \codeinline{x} de la
+    fonction foo vaut 2, car c'est la déclaration \codeinline{x = 2}
+    du \codeinline{let} qui est la plus récemment executée et toujours
+    active lors de l'évaluation du programme. Donc \codeinline{res}
+    vaut 2.
+
+  \end{enumerate}
+\end{Answer}
