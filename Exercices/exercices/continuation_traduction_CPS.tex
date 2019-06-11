@@ -1,4 +1,5 @@
 \begin{Exercise}
+\label{ex:continuation_traduction}
 Réécrire les fonctions suivantes en mode CPS (continuation passing
 style). C'est à dire que chaque fonction doit prendre une continuation
 et envoyer son résultat à cette continuation.
@@ -24,3 +25,7 @@ fib 1 = 1
 fib n = fib (n - 1) + fib (n - 2)
 \end{minted}
 \end{Exercise}
+
+\begin{Answer}
+  \haskellinput{exercices/continuation_traduction_CPS.hs}
+\end{Answer}
