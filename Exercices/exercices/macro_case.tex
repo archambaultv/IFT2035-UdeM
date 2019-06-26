@@ -1,5 +1,6 @@
 \begin{Exercise}[title={Macro case}]
-Soit une macro \codeinline{case} en Scheme qui peut s'utiliser comme suit:
+\label{ex:macro_case}
+  Soit une macro \codeinline{case} en Scheme qui peut s'utiliser comme suit:
 \begin{minted}{scheme}
   (case <exp>
     ((1 3 5) <exp1>)
@@ -23,3 +24,7 @@ exécuter \codeinline{exp2} si \codeinline{exp} vaut 4 et exécuter \codeinline{
   l'utilisateur de cette macro.
 \end{itemize}
 \end{Exercise}
+
+\begin{Answer}[ref={ex:macro_case}]
+  \schemeinput{exercices/macro_case.rkt}
+\end{Answer}

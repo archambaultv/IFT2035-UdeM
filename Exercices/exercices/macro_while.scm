@@ -6,5 +6,3 @@
          (begin
            ,expr
            (,my-loop))))))
-      
-;check_while

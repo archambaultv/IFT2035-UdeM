@@ -1,0 +1,49 @@
+\begin{Exercise}
+\label{ex:type_inference3}
+Donner le type des expressions Haskell ci-dessous. Par exemple, pour
+la question 0, la réponse est: \codeinline{(Int, Int)}. Le type donné
+devrait être aussi polymorphe que possible, mais il est permit de
+considérer les entiers comme étant de type Int.
+
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item \codeinline{(2, 3)}
+\item \codeinline{[['a', 'b'], []]}
+\item \codeinline{(['a', 'b'], [])}
+\item \codeinline{\x -> x + 1}
+\item \codeinline{\f f2 y -> f (f2 y)}
+\item \codeinline{\f x -> f x x}
+\item \codeinline{map (\x -> x - 3) []}
+\item \codeinline{1 + 2}
+\item \codeinline{let f x = x + 1 in map f}
+\item \codeinline{'h' : []}
+\item \codeinline{((\x -> x), let f x = x + 1 in f)}
+\end{enumerate}
+
+Pour rappel, {\textbackslash } sert à définir une fonction anonyme. Par
+  exemple \codeinline{\x -> x} est la fonction identité. De plus, la
+  fonction \codeinline{map} a pour définition :
+\begin{minted}{text}
+map f [] = []               
+map f (x : xs) = f x : map f xs
+\end{minted}
+
+\end{Exercise}
+
+\begin{Answer}[ref={ex:type_inference3}]
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item \codeinline{(2, 3)}
+\item \codeinline{[Char]} ou \codeinline{String}
+\item \codeinline{([Char], [a])}
+\item \codeinline{Int -> Int}
+\item \codeinline{((a, b), c) -> a}
+\item \codeinline{(a -> a -> b) -> a -> b)}
+\item \codeinline{[Int]}
+\item \codeinline{Int}
+\item \codeinline{[Int] -> [Int]}
+\item \codeinline{[Char]}
+\item \codeinline{(a -> a, Int -> Int}
+\end{enumerate}
+  
+\end{Answer}

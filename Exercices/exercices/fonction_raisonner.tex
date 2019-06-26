@@ -34,6 +34,29 @@ dans chacun des cas suivants:
 \end{enumerate}
 \end{Exercise}
 
-% \begin{Answer}[ref={ex:raisonner}]
+\begin{Answer}[ref={ex:raisonner}]
+  \begin{enumerate}
+    \item
+    \begin{description}
+\item{\codeinline{table[0] == 0}} Faux, \codeinline{table} est un pointeur et donc \codeinline{f} peut modifier le tableau.
+\item{\codeinline{size == 2}} Vrai, passage par valeur.
+\item{\codeinline{tmp == 0}} Vrai, \codeinline{tmp} n'est pas accessible depuis \codeinline{f}.
+    \end{description}
 
-% \end{Answer}
+    \item
+    \begin{description}
+\item{\codeinline{table[0] == 0}} Vrai.
+\item{\codeinline{size == 2}} Vrai.
+\item{\codeinline{tmp == 0}} Vrai.
+\end{description}
+
+    \item
+    \begin{description}
+\item{\codeinline{table[0] == 0}} Faux.
+\item{\codeinline{size == 2}} Faux, \codeinline{size} est accessible depuis \codeinline{f}.
+\item{\codeinline{tmp == 0}} Faux, \codeinline{tmp} est accessible depuis \codeinline{f}.
+\end{description}
+
+  \end{enumerate}
+  
+\end{Answer}

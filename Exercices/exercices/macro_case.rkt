@@ -2,35 +2,6 @@
 
 (require compatibility/defmacro)
 
-(define-macro (or-naive a b)
-  `(let ((tmp ,a)) (if tmp tmp ,b)))
-
-(or-naive #t (/ 1 0))
-
-; Le code ci-dessous ne respecte pas la portée lexicale
-; Problème connu sous le nom de : Introduced Binder Hygiene
-(let ((tmp #t))
-  (or-naive #f tmp))
-
-; Le code ci-dessous change la définition de if
-; Problème connu sous le nom de : Reference Hygiene
-(let ((if (lambda (x y z) y)))
-  (or-naive #f #t))
-
-
-; Il est possible de corriger le premier problème
-(define-macro (or a b)
-  (let ((var (gensym)))
-    `(let ((,var ,a)) (if ,var ,var ,b))))
-
-(let ((tmp #t))
-  (or #f tmp))
-
-; Malheureusement il n'est pas possible de corriger
-; le second problème sans modifier le compilateur.
-; Heureusement, Racket (Scheme) ont déjà fait les
-; modifications nécessaires.
-
 (define-macro (case-naive exp . patterns)
   (letrec ((build-clauses
             (lambda (x)

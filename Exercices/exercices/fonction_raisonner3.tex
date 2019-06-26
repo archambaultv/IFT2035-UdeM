@@ -1,0 +1,74 @@
+\begin{Exercise}
+\label{ex:fonction_raisonner3}
+  Soit le morceau de code suivant, où \codeinline{f} est une fonction
+quelconque que l'on ne connaît pas et où le langage utilise une
+syntaxe de style C :
+\begin{minted}{C}
+void foo (void (*f) (char*, int)) {
+ int x = 3, y = 2, z = 1;
+ char *s1 = "haskell";
+ char *s2 = strcpy (s1); /* fait une copie de s1 */
+ while (--x > 0) {
+  int x = y - 2;
+  f (s2, y);
+ }
+ ...
+}
+\end{minted}
+On aimerait savoir (par exemple pour décider de la validité de
+certaines optimisations) si certaines conditions sont nécessairement
+toujours vraies à la fin l'exécution du while.  On s'intéresse plus
+particulièrement aux 5 conditions suivantes:
+\begin{enumerate}
+\item \codeinline{s2[5] == 'l'}
+\item \codeinline{s1[1] == 'a'}
+\item \codeinline{x == 0}
+\item \codeinline{z == 1}
+\item \codeinline{y == 2}
+\end{enumerate}
+Dans chacun des cas suivants, indiquer lesquelles de ces 5 conditions
+sont nécessairement vraies et si non, justifier pourquoi pas. Vous
+pouvez considérer que \codeinline{strcpy} fait uniquement une copie en mémoire et
+rien d'autre.
+\begin{enumerate}
+\item Le langage est exactement comme C: portée statique, passage d'arguments
+  par valeur et affectation autorisée.
+\item Le langage est comme C sauf que tous les arguments sont passés
+  par référence.
+\item Le langage est comme C mais avec portée dynamique.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:fonction_raisonner3}]
+  \begin{enumerate}
+  \item \label{enum_raisonner3}
+\begin{description}
+\item[\codeinline{s2[5] == 'l'}]Faux, \codeinline{s2} est un pointeur et donc \codeinline{f} peut modifier le tableau
+\item[\codeinline{s1[1] == 'a'}] Vrai
+\item[\codeinline{x == 0}] Vrai
+\item[\codeinline{z == 1}] Vrai
+\item[\codeinline{y == 2}] Vrai
+\end{description}
+
+     \item
+\begin{description}
+\item[\codeinline{s2[5] == 'l'}] Faux, voir le point \ref{enum_raisonner3}
+\item[\codeinline{s1[1] == 'a'}] Vrai
+\item[\codeinline{x == 0}] Vrai
+\item[\codeinline{z == 1}] Vrai
+\item[\codeinline{y == 2}] Faux, \codeinline{f} reçoit y par référence et peut donc en modifier la valeur
+\end{description}
+
+     \item
+\begin{description}
+\item[\codeinline{s2[5] == 'l'}] Faux, \codeinline{s2} est accessible depuis \codeinline{f}.
+\item[\codeinline{s1[1] == 'a'}] Faux, \codeinline{s1} est accessible depuis \codeinline{f}.
+\item[\codeinline{x == 0}] Vrai, \codeinline{x} est inaccessible
+  depuis \codeinline{f}, car une autre variable \codeinline{x} est
+  déclaré dans le corps du while.
+\item[\codeinline{z == 1}] Faux, \codeinline{z} est accessible depuis \codeinline{f}.
+\item[\codeinline{y == 2}] Faux, \codeinline{y} est accessible depuis \codeinline{f}.
+\end{description}
+\end{enumerate}
+
+\end{Answer}

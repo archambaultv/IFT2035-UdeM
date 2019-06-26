@@ -71,6 +71,10 @@
 \newcommand{\cinput}[2][]{\inputminted[#1]{c}{#2}}
 \newcommand{\assemblyinline}[2][]{\mintinline[#1]{gas}{#2}}
 \newcommand{\assemblyinput}[2][]{\inputminted[#1]{gas}{#2}}
+\newcommand{\schemeinline}[2][]{\mintinline[#1]{scheme}{#2}}
+\newcommand{\schemeinput}[2][]{\inputminted[#1]{scheme}{#2}}
+\newcommand{\prologinline}[2][]{\mintinline[#1]{prolog}{#2}}
+\newcommand{\prologinput}[2][]{\inputminted[#1]{prolog}{#2}}
 
 %%%% Modify enumeration %%%%
 \usepackage[shortlabels]{enumitem}
@@ -140,9 +144,11 @@ Petit recueil d'exercices pour IFT 2035. Vous trouverez les solutions à la fin,
 
 \chapter{Grammaire}
 
-\input{exercices/grammaire_infixeprefixepostfixe.tex}
+\input{exercices/grammaire_infixe.tex}
 
 \input{exercices/grammaire_postfixe.tex}
+
+\input{exercices/grammaire_préfixe.tex}
 
 \input{exercices/grammaire_addition_multiplication.tex}
 
@@ -156,11 +162,17 @@ Petit recueil d'exercices pour IFT 2035. Vous trouverez les solutions à la fin,
 
 \input{exercices/variable_implantation_portée.tex}
 
+\input{exercices/variable_renommage_alpha.tex}
+
 \chapter{Fonctions}
 
 \input{exercices/fonction_passage_paramètres_portée.tex}
 
 \input{exercices/fonction_raisonner.tex}
+
+\input{exercices/fonction_raisonner2.tex}
+
+\input{exercices/fonction_raisonner3.tex}
 
 \chapter{Récursion}
 \input{exercices/récursion_liste.tex}
@@ -175,6 +187,8 @@ Petit recueil d'exercices pour IFT 2035. Vous trouverez les solutions à la fin,
 \input{exercices/type_inférence.tex}
 
 \input{exercices/type_inférence2.tex}
+
+\input{exercices/type_inférence3.tex}
 
 \chapter{Programmation fonctionnelle}
 

@@ -1,3 +1,5 @@
+\begin{Exercise}
+  \label{ex:macro_while}
 Avec la forme \codeinline{quasiquote} écrire une macro qui permet de faire des
 boucles \codeinline{while} avec la syntaxe suivante.
 
@@ -16,3 +18,9 @@ d'utilisation:
            (write i)
            (set! i (* i 2)))))
 \end{minted}
+\end{Exercise}
+
+
+\begin{Answer}[ref={ex:macro_while}]
+  \schemeinput{exercices/macro_while.scm}
+\end{Answer}

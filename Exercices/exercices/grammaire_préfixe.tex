@@ -1,0 +1,43 @@
+\begin{Exercise}
+\label{ex:grammaire_prefixe}
+Soit les expressions suivantes en notation préfixe:
+\begin{enumerate}
+\item \codeinline{/ - + a b c 2}
+\item \codeinline{== + 1 x sqrt - * b b a}
+\item \codeinline{- - a b c}
+\item \codeinline{not == a - + a b sqrt c}
+\item \codeinline{+ a + b + c + d + e + f g}
+\end{enumerate}
+
+Écrire ces expressions en format infixe, postfixe et en arbre de
+syntaxe abstraite. \codeinline{==} est l'opérateur de comparaison,
+\codeinline{sqrt} et \codeinline{not} sont des fonctions qui acceptent
+un seul argument.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:grammaire_prefixe}]
+
+\begin{enumerate}
+\item \begin{description}
+  \item[infixe] \codeinline{(a + b - c) / 2}
+  \item[postfixe] \codeinline{a b + c - 2 /}
+  \end{description}
+\item \begin{description}
+  \item[infixe] \codeinline{1 + x == sqrt(b * b - a)}
+  \item[postfixe] \codeinline{1 x + b b * a - sqrt ==}
+  \end{description}
+\item \begin{description}
+  \item[infixe] \codeinline{a - b - c}
+  \item[postfixe] \codeinline{a b - c -}
+    \end{description}
+  \item \begin{description}
+    \item[infixe] \codeinline{not(a == a + b - sqrt(c))}
+    \item[postfixe] \codeinline{a a b + c sqrt - == not}
+    \end{description}
+  \item \begin{description}
+    \item[infixe] \codeinline{a + (b + (c + (d + (e + (f + g)))))}
+    \item[postfixe] \codeinline{a b c d e f g + + + + + +}
+      \end{description}
+\end{enumerate}
+
+\end{Answer}

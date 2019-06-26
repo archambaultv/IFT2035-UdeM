@@ -1,0 +1,42 @@
+\begin{Exercise}
+\label{ex:variable_alpha}
+Le code ci-dessous est écrit en Haskell et utilise donc la portée lexicale:
+\begin{minted}{haskell}
+x = 1
+foo y = x + y
+bar (x, y) = x + y
+resultat = let bar x = x + 3
+               x = 5
+           in foo (bar x)
+\end{minted}
+
+\begin{enumerate}
+\item Réécrire le code en renommant tous les identificateurs pour que chaque
+variable ait un nom différent des autres. Bien sûr ce renommage ne
+doit pas changer la sémantique du code.
+
+
+\item Quelle est la valeur de \codeinline{resultat} ?
+\item Quelle serait la valeur de \codeinline{resultat} si Haskell
+  avait la portée dynamique ?
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:variable_alpha}]
+  \begin{enumerate}
+  \item
+    \begin{minted}{haskell}
+x1 = 1
+foo y1 = x1 + y1
+bar1 (x2, y2) = x2 + y2
+resultat = let bar2 x3 = x3 + 3
+               x4 = 5
+           in foo (bar2 x4)
+         \end{minted}
+       \item 9
+         
+       \item 13
+
+         
+    \end{enumerate}
+\end{Answer}

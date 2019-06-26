@@ -1,4 +1,5 @@
 \begin{Exercise}
+\label{ex:prolog_quicksort}
 Définir la règle de tri \verb|quicksort(X,Y)| qui dit que \codeinline{Y} contient
 les mêmes éléments que la liste \codeinline{X}, mais triés par ordre croissant.
 Cette version utilisera un opérateur de comparaison fixe, la relation
@@ -11,3 +12,7 @@ petits que \codeinline{X}, alors que \codeinline{G} contient ceux qui sont plus 
 Utiliser la règle prédéfinie \verb|append(X,Y,Z)| qui dit que \codeinline{Z} est la
 concaténation des listes \codeinline{X} et \codeinline{Y}.
 \end{Exercise}
+
+\begin{Answer}[ref={ex:prolog_quicksort}]
+  \schemeinput{exercices/prolog_quicksort.pl}
+\end{Answer}
