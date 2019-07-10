@@ -5,7 +5,7 @@ utiliser pour représenter une table associative (qui associe des \emph{clés}
 de type \haskellinline{Int} à des valeurs de type \codeinline{b}):
 %%
 \begin{minted}{haskell}
-data TreeMap b = Empty | Node Int b (TreeMap b) (TreeMap b)
+data TreeMap b = Empty | Node (TreeMap b) Int b (TreeMap b)
 \end{minted}
 %%
 L'exercice est de définir les opérations typiques sur une telle
@@ -16,14 +16,16 @@ vice versa pour la branche de droite.
 
 Il y a trois opérations:
 \begin{itemize}
-\item \haskellinline{tmLookup}: rechercher la valeur associée à une clé passée
+\item \haskellinline{tmLookup}: retourne la valeur associée à une clé passée
   en paramètre.
-\item \haskellinline{tmInsert}: ajouter une entrée (donnée sous la forme
+\item \haskellinline{tmInsert}: ajoute une entrée (donnée sous la forme
   d'une clé et de sa valeur) dans la table.
-\item \haskellinline{tmRemove}: enlever une entrée (dont la clé est passée
+\item \haskellinline{tmRemove}: enleve une entrée (dont la clé est passée
   en paramètre).
 \end{itemize}
-Ces fonctions ne doivent jamais signaler d'erreur.
+
+Ces fonctions ne doivent jamais planter ou utiliser la primitive \codeinline{error}.
+
 \begin{enumerate}
 \item Donner le type de ces trois fonctions.
 \item Donner une liste, aussi concise et complète que possible,

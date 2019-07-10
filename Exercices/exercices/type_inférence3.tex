@@ -32,18 +32,16 @@ map f (x : xs) = f x : map f xs
 
 \begin{Answer}[ref={ex:type_inference3}]
 \begin{enumerate}
-\setcounter{enumi}{-1}
-\item \codeinline{(2, 3)}
-\item \codeinline{[Char]} ou \codeinline{String}
+\item \codeinline{[[Char]]} ou \codeinline{[String]}
 \item \codeinline{([Char], [a])}
 \item \codeinline{Int -> Int}
-\item \codeinline{((a, b), c) -> a}
+\item \codeinline{(b -> c) -> (a -> b) -> a -> c}
 \item \codeinline{(a -> a -> b) -> a -> b)}
 \item \codeinline{[Int]}
 \item \codeinline{Int}
 \item \codeinline{[Int] -> [Int]}
 \item \codeinline{[Char]}
-\item \codeinline{(a -> a, Int -> Int}
+\item \codeinline{(a -> a, Int -> Int)}
 \end{enumerate}
   
 \end{Answer}
