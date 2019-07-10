@@ -6,3 +6,6 @@
 *.pygstyle
 *.bbl
 *.blg
+
+# Emacs
+.\#*
